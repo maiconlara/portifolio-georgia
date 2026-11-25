@@ -4,21 +4,15 @@ import { cn } from "@/lib/utils";
 type HeroVariant = "primary" | "secondary" | "tertiary" | "outline" | "ghost" | "danger";
 
 /**
- * HeroUI variants plus the site's own:
- * - `ink-outline`: ink outline that fills on hover.
- * - `pollen`: yellow pill with ink text.
- * - `inverse`: cream pill for dark green bands.
- * - `inverse-outline`: cream outline for dark green bands.
+ * HeroUI variants plus the site's own `ink-outline`: ink outline that fills
+ * on hover.
  */
-export type ButtonVariant = HeroVariant | "ink-outline" | "pollen" | "inverse" | "inverse-outline";
+export type ButtonVariant = HeroVariant | "ink-outline";
 
 export type ButtonSize = "sm" | "md" | "lg";
 
 const EXTRA_VARIANTS: Partial<Record<ButtonVariant, { base: HeroVariant; modifier: string }>> = {
   "ink-outline": { base: "ghost", modifier: "button--ink-outline" },
-  pollen: { base: "primary", modifier: "button--pollen" },
-  inverse: { base: "primary", modifier: "button--inverse" },
-  "inverse-outline": { base: "ghost", modifier: "button--inverse-outline" },
 };
 
 export interface ButtonStyleOptions {

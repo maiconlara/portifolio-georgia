@@ -5,7 +5,7 @@ const config = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: ["node_modules/**", ".next/**", "out/**", "referencias/**", "next-env.d.ts"],
+    ignores: ["node_modules/**", ".next/**", "out/**", "next-env.d.ts"],
   },
 ];
 

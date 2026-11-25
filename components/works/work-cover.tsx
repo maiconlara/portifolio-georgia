@@ -21,15 +21,15 @@ interface MotifProps {
 function DaisyMotif() {
   return (
     <>
-      <div className="absolute -bottom-[18%] -right-[22%] w-[95%]">
+      <span className="absolute -bottom-[18%] -right-[22%] block w-[95%]">
         <Daisy className="w-full" />
-      </div>
-      <div className="absolute left-[12%] top-[12%] w-[22%]">
+      </span>
+      <span className="absolute left-[12%] top-[12%] block w-[22%]">
         <Daisy className="w-full" />
-      </div>
-      <div className="absolute left-[38%] top-[34%] w-[12%]">
+      </span>
+      <span className="absolute left-[38%] top-[34%] block w-[12%]">
         <Daisy className="w-full" />
-      </div>
+      </span>
     </>
   );
 }
@@ -104,7 +104,8 @@ interface WorkCoverProps {
 /**
  * Picture of a work. Shows the image from `public/trabalhos/` when there is
  * one; otherwise draws a placeholder in the work's color, so the layout
- * stays complete while the real images are not in place.
+ * stays complete while the real images are not in place. Built from inline
+ * elements, so it can sit inside a button.
  */
 export function WorkCover({ work, imageIndex = 0, className, sizes = "(min-width: 820px) 33vw, 100vw" }: WorkCoverProps) {
   const image = work.images[imageIndex];
@@ -112,9 +113,9 @@ export function WorkCover({ work, imageIndex = 0, className, sizes = "(min-width
 
   if (image) {
     return (
-      <div className={cn("relative overflow-hidden", className)}>
+      <span className={cn("relative block overflow-hidden", className)}>
         <Image src={image} alt={`${work.title}, imagem ${imageIndex + 1}`} fill sizes={sizes} className="object-cover" />
-      </div>
+      </span>
     );
   }
 
@@ -126,8 +127,12 @@ export function WorkCover({ work, imageIndex = 0, className, sizes = "(min-width
   };
 
   return (
-    <div role="img" aria-label={`${work.title}, ilustração provisória`} className={cn("relative overflow-hidden", tone.background, className)}>
+    <span
+      role="img"
+      aria-label={`${work.title}, ilustração provisória`}
+      className={cn("relative block overflow-hidden", tone.background, className)}
+    >
       {motifs[work.cover.motif]}
-    </div>
+    </span>
   );
 }

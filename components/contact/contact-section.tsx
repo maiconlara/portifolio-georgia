@@ -1,72 +1,69 @@
 import type { CSSProperties } from "react";
-import { ContactStamps } from "@/components/contact/contact-stamps";
+import { ContactChannels } from "@/components/contact/contact-channels";
+import { ContactSubjects } from "@/components/contact/contact-subjects";
 import { CopyEmailButton } from "@/components/contact/copy-email-button";
-import { SealRing } from "@/components/contact/seal-ring";
-import { ServicesList } from "@/components/contact/services-list";
-import { IconTile } from "@/components/icon-tile";
+import { DaisySeal } from "@/components/letter/daisy-seal";
 import { CONTACT } from "@/config/contact";
 import { SITE } from "@/config/site";
 
 /**
- * Contact page on the dark green band: title, e-mail with copy button, the
- * seal ring, the channel stamps and the kinds of project.
+ * Contact page written as a letter: a sheet of paper with the title, the
+ * e-mail and Ge's signature, sealed with the daisy at the corner. Under it,
+ * the other channels and the subjects that open a ready e-mail.
  */
 export function ContactSection() {
   return (
-    <section className="bg-stem-deep text-cream">
-      <div className="wrap pb-20 pt-14 md:pb-28 md:pt-20">
-        <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
-          <div>
-            <p className="group enter-fade mb-4 flex w-fit cursor-default items-center gap-3 font-semibold text-cream/80">
-              <IconTile icon="mail" size={42} iconSize="md" />
-              {CONTACT.kicker}
-            </p>
-            <h1 className="text-display text-cream">
-              <span className="block overflow-hidden pb-[0.06em]">
-                <span className="enter-rise" style={{ "--enter-step": "0.08s" } as CSSProperties}>
-                  {CONTACT.title}
-                </span>
-              </span>
-              <span className="block overflow-hidden pb-[0.08em]">
-                <em
-                  className="enter-rise not-italic text-gradient-light"
-                  style={{ "--enter-step": "0.2s" } as CSSProperties}
-                >
-                  {CONTACT.titleAccent}
-                </em>
-              </span>
-            </h1>
-            <p className="enter-fade mt-6 max-w-[46ch] text-lead text-cream/85" style={{ "--enter-step": "0.35s" } as CSSProperties}>
-              {CONTACT.lead}
-            </p>
-            <div className="enter-fade mt-8 flex flex-wrap items-center gap-4" style={{ "--enter-step": "0.45s" } as CSSProperties}>
-              <a
-                href={`mailto:${CONTACT.email}`}
-                className="break-all bg-[linear-gradient(var(--pollen),var(--pollen))] bg-[length:0_0.08em] bg-[position:0_100%] bg-no-repeat text-[clamp(1.6rem,4vw,3rem)] font-bold tracking-tight transition-[background-size] duration-500 ease-(--ease-glide) hover:bg-[length:100%_0.08em]"
-              >
-                {CONTACT.email}
-              </a>
-              <CopyEmailButton
-                email={CONTACT.email}
-                label={CONTACT.copyLabel}
-                copied={CONTACT.copied}
-                failed={CONTACT.copyFailed}
-              />
-            </div>
-          </div>
-          <SealRing
-            photo={SITE.photo}
-            text={CONTACT.ringText}
+    <section className="wrap pb-24 pt-14 md:pb-36 md:pt-24">
+      <div className="relative rounded-3xl bg-env-paper px-6 pb-10 pt-16 shadow-[0_0_0_1px_var(--line),var(--tile-shadow)] sm:px-10 md:px-16 md:pb-14 md:pt-20 lg:px-20">
+        <span
+          className="enter-stamp absolute -top-12 right-4 block w-28 sm:right-8 sm:w-32 md:-top-16 md:right-14 md:w-44"
+          style={{ "--enter-step": "0.45s" } as CSSProperties}
+        >
+          <DaisySeal photo={SITE.photo} className="w-full rotate-[8deg]" />
+        </span>
+
+        <h1 className="max-w-[13ch] text-hero">
+          <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
+            <span className="enter-rise">{CONTACT.title}</span>
+          </span>
+        </h1>
+        <p
+          className="enter-fade mt-6 max-w-[44ch] text-lead text-ink-soft"
+          style={{ "--enter-step": "0.2s" } as CSSProperties}
+        >
+          {CONTACT.lead}
+        </p>
+
+        <div
+          className="enter-fade mt-10 flex flex-wrap items-center gap-x-6 gap-y-4"
+          style={{ "--enter-step": "0.3s" } as CSSProperties}
+        >
+          <a
             href={`mailto:${CONTACT.email}`}
-            label={`Mandar um e-mail para a ${SITE.name}`}
+            className="break-all text-[clamp(1.5rem,3.6vw,2.8rem)] font-semibold tracking-tight text-ink underline decoration-pollen decoration-[0.08em] underline-offset-[0.2em] transition-colors duration-200 hover:text-stem"
+          >
+            {CONTACT.email}
+          </a>
+          <CopyEmailButton
+            email={CONTACT.email}
+            label={CONTACT.copyLabel}
+            copied={CONTACT.copied}
+            failed={CONTACT.copyFailed}
           />
         </div>
 
-        <div className="mt-16 md:mt-20">
-          <ContactStamps channels={CONTACT.channels} postmark={CONTACT.postmark} />
-        </div>
+        <p className="mt-14 text-right text-subtitle font-medium text-stem md:mt-20">{SITE.signature}</p>
+      </div>
 
-        <ServicesList title={CONTACT.servicesTitle} services={CONTACT.services} email={CONTACT.email} />
+      <div className="mt-20 grid gap-16 md:mt-28 md:grid-cols-12 md:gap-x-10">
+        <ContactChannels title={CONTACT.channelsTitle} channels={CONTACT.channels} className="md:col-span-7" />
+        <ContactSubjects
+          title={CONTACT.subjectsTitle}
+          hint={CONTACT.subjectsHint}
+          subjects={CONTACT.subjects}
+          email={CONTACT.email}
+          className="md:col-span-4 md:col-start-9"
+        />
       </div>
     </section>
   );

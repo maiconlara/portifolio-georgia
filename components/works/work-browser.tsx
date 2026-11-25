@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { CategoryEnvelope } from "@/components/works/category-envelope";
-import { WorkCard } from "@/components/works/work-card";
+import { useMemo, useState, type CSSProperties, type Key } from "react";
+import { ToggleButton, ToggleButtonGroup } from "@heroui/react";
 import { WorkDialog } from "@/components/works/work-dialog";
+import { WorkTile } from "@/components/works/work-tile";
 import type { Work, WorkCategory } from "@/config/works";
 import { setHash, useHash } from "@/hooks/use-hash";
+
+type CategoryKey = WorkCategory["key"];
 
 interface WorkBrowserProps {
   categories: WorkCategory[];
@@ -13,12 +15,12 @@ interface WorkBrowserProps {
 }
 
 /**
- * Category envelopes, the grid of the open envelope and the work dialog.
- * The open work lives in the address hash (`/trabalhos/#slug`), so a work
- * can be shared and the home page can link straight to it.
+ * Category filter, the grid of works and the work dialog. The open work
+ * lives in the address hash (`/trabalhos/#slug`), so a work can be shared
+ * and the home page can link straight to it.
  */
 export function WorkBrowser({ categories, works }: WorkBrowserProps) {
-  const [categoryKey, setCategoryKey] = useState<WorkCategory["key"]>("todos");
+  const [categoryKey, setCategoryKey] = useState<CategoryKey>("todos");
   const hash = useHash();
 
   const visibleWorks = useMemo(
@@ -32,47 +34,53 @@ export function WorkBrowser({ categories, works }: WorkBrowserProps) {
   const category = categories.find((item) => item.key === categoryKey) ?? categories[0];
   const siblings = dialogWork && visibleWorks.some((work) => work.slug === dialogWork.slug) ? visibleWorks : works;
 
-  const countOf = (key: WorkCategory["key"]) =>
+  const countOf = (key: CategoryKey) =>
     key === "todos" ? works.length : works.filter((work) => work.categories.some((item) => item === key)).length;
+
+  const handleFilterChange = (keys: Set<Key>) => {
+    const [selectedKey] = keys;
+    const nextCategory = categories.find((item) => item.key === selectedKey);
+    if (nextCategory) setCategoryKey(nextCategory.key);
+  };
 
   return (
     <>
-      <div
-        role="group"
-        aria-label="Envelopes de trabalhos"
-        className="-mx-(--pad) flex snap-x snap-mandatory gap-4 overflow-x-auto px-(--pad) pb-4 pt-14 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-5 md:gap-5 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
+      <ToggleButtonGroup
+        aria-label="Filtrar trabalhos por tipo"
+        selectionMode="single"
+        disallowEmptySelection
+        isDetached
+        selectedKeys={[categoryKey]}
+        onSelectionChange={handleFilterChange}
+        className="flex-wrap justify-start gap-2"
       >
-        {categories.map((item, index) => (
-          <div key={item.key} className="w-[min(44vw,210px)] shrink-0 snap-start md:w-auto">
-            <CategoryEnvelope
-              category={item}
-              position={index + 1}
-              count={countOf(item.key)}
-              isOpen={item.key === categoryKey}
-              onOpen={() => setCategoryKey(item.key)}
-            />
-          </div>
+        {categories.map((item) => (
+          <ToggleButton key={item.key} id={item.key} className="filter-chip">
+            {item.label}
+            <span className="filter-chip__count">{countOf(item.key)}</span>
+          </ToggleButton>
         ))}
-      </div>
+      </ToggleButtonGroup>
 
-      <div
-        aria-live="polite"
-        className="mb-10 mt-10 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-t border-line pt-6"
-      >
-        <h2 key={category.key} className="animate-[fade-up_0.5s_var(--ease-pop)_both] text-title">
-          {category.name}
-        </h2>
-        <p className="text-ink-soft">
-          {visibleWorks.length} {visibleWorks.length === 1 ? "trabalho neste envelope" : "trabalhos neste envelope"}
-        </p>
-      </div>
+      <p aria-live="polite" className="sr-only">
+        {category.name}: {visibleWorks.length} {visibleWorks.length === 1 ? "trabalho" : "trabalhos"}
+      </p>
 
       <div
         key={categoryKey}
-        className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-x-8 gap-y-12 pb-20 md:pb-28"
+        className="work-grid mt-10 grid gap-x-6 gap-y-14 pb-24 md:mt-14 md:grid-cols-2 md:pb-36 lg:gap-x-8 lg:gap-y-20"
       >
         {visibleWorks.map((work, index) => (
-          <WorkCard key={work.slug} work={work} index={index} onOpen={setHash} />
+          <button
+            key={work.slug}
+            type="button"
+            onClick={() => setHash(work.slug)}
+            aria-label={`Abrir ${work.title}`}
+            className="group block w-full animate-[fade-up_0.6s_var(--ease-glide)_both] cursor-pointer text-left"
+            style={{ animationDelay: `${(index % 6) * 60}ms` } as CSSProperties}
+          >
+            <WorkTile work={work} coverClassName="aspect-4/3" sizes="(min-width: 820px) 50vw, 100vw" />
+          </button>
         ))}
       </div>
 

@@ -38,7 +38,6 @@
   --env-paper: #fffdf6;
   --env-rule: rgb(76 122 61 / 0.16);
   --heart: #c8324a;
-
 }
 
 /**
@@ -71,7 +70,6 @@
   --env-paper: #fffafc;
   --env-rule: rgb(176 48 106 / 0.14);
   --heart: #c8324a;
-
 }
 
 /**
@@ -117,14 +115,15 @@
   --field-placeholder: var(--ink-soft);
   --radius: 0.75rem;
   --overlay-shadow: 0 30px 60px -30px rgb(30 42 31 / 0.45);
+  --tile-shadow: 0 30px 60px -40px rgb(30 42 31 / 0.5);
 
-  --pad: clamp(1rem, 4vw, 3.2rem);
+  --pad: clamp(1rem, 3vw, 3rem);
   --header-h: 72px;
 }
 
-@media (max-width: 1079px) {
+@media (max-width: 819px) {
   :root {
-    --header-h: 116px;
+    --header-h: 64px;
   }
 }
 
@@ -135,7 +134,6 @@
   --font-display: var(--font-sans);
 
   --breakpoint-md: 51.25rem;
-  --breakpoint-nav: 67.5rem;
 
   --ease-glide: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -162,45 +160,26 @@
   --color-line: var(--line);
   --color-env-paper: var(--env-paper);
 
-
-  --text-mast: clamp(4.2rem, 13vw, 11.5rem);
-  --text-mast--line-height: 0.86;
-  --text-mast--letter-spacing: -0.05em;
-  --text-display: clamp(3rem, 8.5vw, 7.2rem);
-  --text-display--line-height: 0.92;
-  --text-display--letter-spacing: -0.04em;
-  --text-title: clamp(2rem, 4.2vw, 3.3rem);
-  --text-title--line-height: 1;
+  --text-hero: clamp(2.5rem, 6.1vw, 7.25rem);
+  --text-hero--line-height: 1.04;
+  --text-hero--letter-spacing: -0.04em;
+  --text-display: clamp(3.2rem, 8vw, 8.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.045em;
+  --text-title: clamp(1.9rem, 3.4vw, 3.2rem);
+  --text-title--line-height: 1.05;
   --text-title--letter-spacing: -0.03em;
-  --text-subtitle: clamp(1.35rem, 2.4vw, 1.8rem);
-  --text-subtitle--line-height: 1.15;
+  --text-subtitle: clamp(1.3rem, 2vw, 1.75rem);
+  --text-subtitle--line-height: 1.2;
   --text-subtitle--letter-spacing: -0.02em;
-  --text-lead: clamp(1.08rem, 1.5vw, 1.25rem);
+  --text-lead: clamp(1.1rem, 1.4vw, 1.3rem);
   --text-lead--line-height: 1.55;
-  --text-kicker: 0.95rem;
-  --text-kicker--line-height: 1.3;
-}
-
-/** Gradient accent on words, as in Michelly's hero. For light backgrounds. */
-@utility text-gradient {
-  background: linear-gradient(100deg, var(--stem) 10%, var(--pollen-deep) 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/** Gradient accent for the dark green band. */
-@utility text-gradient-light {
-  background: linear-gradient(100deg, var(--pollen) 15%, var(--blush) 85%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 /** Page width with the side gutter. */
 @utility wrap {
   width: 100%;
-  max-width: 1360px;
+  max-width: 1600px;
   margin-inline: auto;
   padding-inline: var(--pad);
 }
@@ -227,7 +206,7 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.025em;
     color: var(--ink);
     text-wrap: balance;
@@ -271,13 +250,13 @@
 }
 
 @layer components {
-  /* ---------- HeroUI: buttons as pills with an ink outline ---------- */
+  /* ---------- HeroUI: buttons as pills ---------- */
   .button {
     border-radius: 999px;
-    font-weight: 700;
+    font-weight: 600;
     border: 1.5px solid transparent;
     transition:
-      transform 350ms var(--ease-pop),
+      transform 250ms var(--ease-glide),
       background-color 200ms var(--ease-glide),
       color 200ms var(--ease-glide),
       border-color 200ms var(--ease-glide);
@@ -290,14 +269,14 @@
     font-size: 1rem;
   }
 
-  @media (hover: hover) {
-    .button:hover {
-      transform: translateY(-2px);
-    }
-  }
-
   .button--primary {
     border-color: var(--ink);
+  }
+
+  @media (hover: hover) {
+    .button--primary:hover {
+      border-color: var(--stem);
+    }
   }
 
   .button--ink-outline {
@@ -308,37 +287,9 @@
     border-color: var(--ink);
   }
 
-  .button--pollen {
-    --button-bg: var(--pollen);
-    --button-bg-hover: var(--pollen-soft);
-    --button-bg-pressed: var(--pollen-soft);
-    --button-fg: var(--ink);
-    border-color: var(--ink);
-  }
-
-  .button--inverse {
-    --button-bg: var(--cream);
-    --button-bg-hover: var(--pollen);
-    --button-bg-pressed: var(--pollen);
-    --button-fg: var(--stem-deep);
-    border-color: var(--cream);
-  }
-
-  .button--inverse-outline {
-    --button-bg: transparent;
-    --button-bg-hover: var(--cream);
-    --button-bg-pressed: var(--cream);
-    --button-fg: var(--cream);
-    border-color: var(--cream);
-  }
-
   @media (hover: hover) {
     .button--ink-outline:hover {
       --button-fg: var(--cream);
-    }
-
-    .button--inverse-outline:hover {
-      --button-fg: var(--stem-deep);
     }
   }
 
@@ -358,278 +309,77 @@
     transform: translateX(3px);
   }
 
-  .chip {
-    border-radius: 999px;
-    font-weight: 600;
-  }
-
-  .chip--lg {
-    padding: 0.3rem 0.85rem;
-    font-size: 0.9rem;
-  }
-
   .modal__dialog {
-    border-radius: 1.25rem;
+    border-radius: 1.5rem;
   }
 
-  /* ---------- Icon tile: round icon that wiggles with its host ---------- */
-  .icon-tile {
-    display: inline-grid;
-    flex: none;
-    place-items: center;
-    width: var(--tile-size, 48px);
-    height: var(--tile-size, 48px);
-    border-radius: 50%;
-    background: var(--tile-bg, var(--pollen-soft));
-    color: var(--tile-fg, var(--ink));
-    box-shadow: inset 0 0 0 1.5px var(--ink);
-    transition:
-      transform 400ms var(--ease-pop),
-      background-color 250ms var(--ease-glide);
+  /* ---------- Fixed header: a hairline shows up once the page scrolls ---------- */
+  .site-header {
+    box-shadow: 0 1px 0 transparent;
   }
 
-  :is(.group:hover, .group:focus-visible) .icon-tile {
-    transform: rotate(-10deg) scale(1.08);
-    background: var(--tile-bg-hover, var(--pollen));
+  @supports (animation-timeline: scroll()) {
+    .site-header {
+      animation: header-edge linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 96px;
+    }
   }
 
-  /* ---------- Photo avatar ---------- */
-  .photo-avatar {
-    position: relative;
-    display: inline-block;
-    flex: none;
-    width: var(--avatar-size, 48px);
-    height: var(--avatar-size, 48px);
-    border-radius: 50%;
-    overflow: hidden;
-    background: var(--pollen-soft);
-    box-shadow:
-      0 0 0 2px var(--cream),
-      0 0 0 3.5px var(--ink);
-    transition: transform 400ms var(--ease-pop);
+  @supports not (animation-timeline: scroll()) {
+    .site-header {
+      box-shadow: 0 1px 0 var(--line);
+    }
   }
 
-  :is(.group:hover, .group:focus-visible) .photo-avatar {
-    transform: rotate(-6deg) scale(1.05);
+  /* ---------- Category filter (Trabalhos), HeroUI ToggleButton ---------- */
+  .filter-chip {
+    --toggle-button-bg: transparent;
+    --toggle-button-bg-hover: var(--cream-deep);
+    --toggle-button-bg-pressed: var(--cream-deep);
+    --toggle-button-fg: var(--ink);
+    --toggle-button-bg-selected: var(--ink);
+    --toggle-button-bg-selected-hover: var(--ink);
+    --toggle-button-bg-selected-pressed: var(--ink);
+    --toggle-button-fg-selected: var(--cream);
+    height: 2.75rem;
+    padding-inline: 1.15rem;
+    gap: 0.45rem;
+    font-size: 0.98rem;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px var(--line);
   }
 
-  /* ---------- Ruled paper and frames ---------- */
+  .filter-chip[data-selected="true"] {
+    box-shadow: none;
+  }
+
+  .filter-chip__count {
+    font-size: 0.8em;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.6;
+  }
+
+  /*
+   * Works grid: two columns from `md`. A last tile left alone in its row
+   * takes the whole width with a wider picture, so the grid never ends with
+   * an empty half.
+   */
+  @media (min-width: 51.25rem) {
+    .work-grid > :last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .work-grid > :last-child:nth-child(odd) .work-tile__cover {
+      aspect-ratio: 21 / 9;
+    }
+  }
+
+  /* ---------- Ruled paper (letter of the page transition) ---------- */
   .paper-ruled {
     background-color: var(--env-paper);
     background-image: linear-gradient(transparent calc(100% - 1px), var(--env-rule) calc(100% - 1px));
     background-size: 100% 2rem;
-  }
-
-  .frame-polaroid {
-    padding: 12px 12px 44px;
-    background: var(--petal);
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 22px 34px -22px rgb(30 42 31 / 0.55);
-    rotate: var(--tilt, -1.5deg);
-  }
-
-  .frame-tape {
-    position: relative;
-    padding: 14px;
-    background: var(--env-paper);
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 22px 34px -22px rgb(30 42 31 / 0.55);
-  }
-
-  .frame-tape::before,
-  .frame-tape::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    width: 34%;
-    height: 26px;
-    background: color-mix(in oklab, var(--blush) 70%, transparent);
-    background-image: repeating-linear-gradient(
-      45deg,
-      rgb(255 255 255 / 0.28) 0 6px,
-      transparent 6px 12px
-    );
-  }
-
-  .frame-tape::before {
-    top: -10px;
-    left: -12px;
-    rotate: -24deg;
-  }
-
-  .frame-tape::after {
-    right: -12px;
-    bottom: -8px;
-    rotate: -24deg;
-    background-color: color-mix(in oklab, var(--pollen) 75%, transparent);
-  }
-
-  .frame-mat {
-    padding: 10px;
-    background: var(--ink);
-    box-shadow: 0 22px 34px -22px rgb(30 42 31 / 0.7);
-  }
-
-  .frame-mat > * {
-    background: var(--petal);
-    padding: clamp(12px, 1.6vw, 18px);
-  }
-
-  .frame-stamp {
-    padding: 14px;
-    background: var(--petal);
-    --hole: 7px;
-    mask:
-      linear-gradient(#000 0 0) center / calc(100% - var(--hole) * 2) calc(100% - var(--hole) * 2) no-repeat,
-      radial-gradient(circle at var(--hole) var(--hole), transparent calc(var(--hole) - 2.5px), #000 calc(var(--hole) - 2px))
-        calc(var(--hole) * -1) calc(var(--hole) * -1) / calc(var(--hole) * 2) calc(var(--hole) * 2) round;
-  }
-
-  /* ---------- Category envelopes (Trabalhos) ---------- */
-  .envelope {
-    position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 3.5;
-    text-align: left;
-    perspective: 900px;
-    transition: translate 450ms var(--ease-pop);
-  }
-
-  .envelope:hover {
-    translate: 0 -5px;
-  }
-
-  .envelope[aria-pressed="true"] {
-    translate: 0 -10px;
-  }
-
-  .envelope__paper {
-    position: absolute;
-    inset: 8% 9% auto;
-    height: 64%;
-    border-radius: 3px;
-    box-shadow: 0 4px 10px -6px rgb(0 0 0 / 0.35);
-    transition:
-      translate 600ms var(--ease-pop),
-      rotate 600ms var(--ease-pop);
-  }
-
-  .envelope:hover .envelope__paper,
-  .envelope[aria-pressed="true"] .envelope__paper {
-    translate: 0 -30%;
-    rotate: -3deg;
-  }
-
-  .envelope__body {
-    position: absolute;
-    inset: 18% 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.15rem;
-    padding: 9%;
-    border-radius: 6px;
-    background: var(--envelope-color);
-    color: var(--envelope-ink);
-    box-shadow: 0 18px 28px -20px rgb(30 42 31 / 0.7);
-  }
-
-  .envelope__body::before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border: 1px dashed currentColor;
-    border-radius: 3px;
-    opacity: 0.35;
-    pointer-events: none;
-  }
-
-  .envelope__flap {
-    position: absolute;
-    inset: 18% 0 auto;
-    z-index: 2;
-    height: 34%;
-    background: var(--envelope-color);
-    filter: brightness(0.93);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transform-origin: 50% 0;
-    transition: transform 550ms var(--ease-pop);
-  }
-
-  .envelope__seal {
-    position: absolute;
-    top: calc(18% + 34% - 15px);
-    left: 50%;
-    z-index: 3;
-    width: 34px;
-    translate: -50% 0;
-    transition:
-      opacity 250ms var(--ease-glide),
-      scale 400ms var(--ease-pop);
-  }
-
-  .envelope:hover .envelope__flap {
-    transform: rotateX(155deg);
-  }
-
-  .envelope[aria-pressed="true"] .envelope__flap {
-    transform: rotateX(180deg);
-  }
-
-  .envelope:hover .envelope__seal,
-  .envelope[aria-pressed="true"] .envelope__seal {
-    opacity: 0;
-    scale: 0.4;
-  }
-
-  /* ---------- Postage stamp (Contato) ---------- */
-  .stamp {
-    --hole: 9px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background: var(--petal);
-    color: var(--ink);
-    padding: 1.6rem 1.4rem 1.3rem;
-    mask:
-      linear-gradient(#000 0 0) center / calc(100% - var(--hole) * 2) calc(100% - var(--hole) * 2) no-repeat,
-      radial-gradient(circle at var(--hole) var(--hole), transparent calc(var(--hole) - 3.5px), #000 calc(var(--hole) - 3px))
-        calc(var(--hole) * -1) calc(var(--hole) * -1) / calc(var(--hole) * 2) calc(var(--hole) * 2) round;
-    rotate: var(--tilt, 0deg);
-    transition:
-      rotate 450ms var(--ease-pop),
-      translate 450ms var(--ease-pop);
-  }
-
-  .stamp-wrap {
-    filter: drop-shadow(0 20px 20px rgb(0 0 0 / 0.25));
-  }
-
-  .stamp-wrap:hover .stamp,
-  .stamp-wrap:focus-within .stamp {
-    rotate: 0deg;
-    translate: 0 -8px;
-  }
-
-  .stamp__inner {
-    position: absolute;
-    inset: 12px;
-    border: 1.5px solid var(--line);
-    pointer-events: none;
-  }
-
-  /* ---------- Marquee ribbon ---------- */
-  .marquee__track {
-    display: inline-flex;
-    white-space: nowrap;
-    animation: marquee 42s linear infinite;
-  }
-
-  .marquee:hover .marquee__track {
-    animation-play-state: paused;
   }
 
   /* ---------- Letter transition between pages ---------- */
@@ -794,7 +544,7 @@
   /* ---------- Page enter, timed after the letter opens ---------- */
   .enter-rise {
     display: inline-block;
-    transform: translateY(105%);
+    transform: translateY(110%);
     animation: rise 1.1s var(--ease-glide) forwards;
     animation-delay: calc(var(--enter-delay, 0s) + var(--enter-step, 0s));
   }
@@ -812,23 +562,14 @@
     animation-delay: calc(var(--enter-delay, 0s) + var(--enter-step, 0s));
   }
 
-  /* ---------- Floating contact button, shown after scrolling ---------- */
-  .floating-contact {
-    translate: 0 160%;
-  }
-
-  @supports (animation-timeline: scroll()) {
-    .floating-contact {
-      animation: floating-in linear both;
-      animation-timeline: scroll(root);
-      animation-range: 120px 260px;
-    }
-  }
-
-  @supports not (animation-timeline: scroll()) {
-    .floating-contact {
-      translate: 0 0;
-    }
+  /*
+   * The daisy seal of the contact letter, pressed onto the paper. It starts
+   * only slightly larger, so it never pushes past the page edge on phones.
+   */
+  .enter-stamp {
+    opacity: 0;
+    animation: seal-press 0.9s var(--ease-glide) forwards;
+    animation-delay: calc(var(--enter-delay, 0s) + var(--enter-step, 0s));
   }
 }
 
@@ -847,9 +588,9 @@
   }
 }
 
-@keyframes marquee {
+@keyframes header-edge {
   to {
-    transform: translateX(-50%);
+    box-shadow: 0 1px 0 var(--line);
   }
 }
 
@@ -897,6 +638,21 @@
   to {
     opacity: 1;
     transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes seal-press {
+  from {
+    opacity: 0;
+    transform: scale(1.25) rotate(-12deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.96) rotate(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -1002,53 +758,18 @@
   }
 }
 
-@keyframes floating-in {
-  from {
-    translate: 0 160%;
-  }
-  to {
-    translate: 0 0;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -8px;
-  }
-}
-
-@keyframes spin-slow {
-  to {
-    rotate: 360deg;
-  }
-}
-
-@keyframes sway {
-  0%,
-  100% {
-    rotate: -1.4deg;
-  }
-  50% {
-    rotate: 1.4deg;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .letter {
     display: none;
   }
-
 
   .enter-rise {
     transform: none;
   }
 
   .enter-fade,
-  .enter-pop {
+  .enter-pop,
+  .enter-stamp {
     opacity: 1;
     scale: 1;
   }

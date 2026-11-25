@@ -1,26 +1,17 @@
 import type { Metadata } from "next";
 import { AboutSection } from "@/components/about/about-section";
-import { PageIntro } from "@/components/page-intro";
+import { PageHeader } from "@/components/page-header";
 import { ABOUT } from "@/config/about";
 
 export const metadata: Metadata = {
   title: "Sobre",
-  description: "Quem é a Ge, o que a inspira e os seus humores.",
+  description: "Quem é a Ge, o que a inspira e o que ela faz fora da tela.",
 };
 
 export default function AboutPage() {
   return (
     <>
-      <PageIntro
-        kicker={ABOUT.intro.kicker}
-        title={
-          <>
-            Sobre <em>mim</em>
-          </>
-        }
-        lead={ABOUT.intro.lead}
-        icon="person"
-      />
+      <PageHeader title={ABOUT.intro.title} lead={ABOUT.intro.lead} />
       <AboutSection />
     </>
   );

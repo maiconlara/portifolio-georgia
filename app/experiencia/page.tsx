@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EducationSection } from "@/components/experience/education-section";
 import { ExperienceList } from "@/components/experience/experience-list";
 import { SkillGroups } from "@/components/experience/skill-groups";
-import { PageIntro } from "@/components/page-intro";
+import { PageHeader } from "@/components/page-header";
 import { EXPERIENCE } from "@/config/experience";
 
 export const metadata: Metadata = {
@@ -13,12 +13,7 @@ export const metadata: Metadata = {
 export default function ExperiencePage() {
   return (
     <>
-      <PageIntro
-        kicker={EXPERIENCE.intro.kicker}
-        title={EXPERIENCE.intro.title}
-        lead={EXPERIENCE.intro.lead}
-        icon="work"
-      />
+      <PageHeader title={EXPERIENCE.intro.title} lead={EXPERIENCE.intro.lead} />
       <ExperienceList title={EXPERIENCE.jobsTitle} jobs={EXPERIENCE.jobs} />
       <SkillGroups title={EXPERIENCE.skillsTitle} groups={EXPERIENCE.skills} />
       <EducationSection

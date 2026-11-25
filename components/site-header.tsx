@@ -1,42 +1,29 @@
+import { Daisy } from "@/components/daisy";
 import { TransitionLink } from "@/components/letter/transition-link";
-import { PhotoAvatar } from "@/components/photo-avatar";
+import { MobileMenu } from "@/components/mobile-menu";
 import { SiteNav } from "@/components/site-nav";
-import { LinkButton } from "@/components/ui/link-button";
 import { SITE } from "@/config/site";
 
 /**
- * Fixed top bar: brand with Ge's photo, the menu (centered on wide screens,
- * a second scrolling row on narrow ones) and the contact call.
+ * Fixed top bar: Ge's name with a daisy on the left and the menu on the
+ * right. On narrow screens the menu folds into a drawer (`MobileMenu`).
  */
 export function SiteHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-100 border-b border-line bg-cream/88 backdrop-blur-md">
-      <div className="relative flex h-[72px] items-center justify-between gap-6 px-(--pad) nav:h-(--header-h)">
+    <header className="site-header fixed inset-x-0 top-0 z-100 bg-background">
+      <div className="wrap flex h-(--header-h) items-center justify-between gap-6">
         <TransitionLink
           href="/"
           aria-label={`${SITE.name}, início`}
-          className="group flex items-center gap-3 rounded-full"
+          className="group flex items-center gap-2.5 rounded-full"
         >
-          <PhotoAvatar size={42} />
-          <span className="leading-none">
-            <span className="block text-xl font-bold tracking-tight text-ink">
-              {SITE.name}
-            </span>
-            <span className="mt-1 hidden text-sm text-ink-soft sm:block">{SITE.role}</span>
-          </span>
+          <Daisy className="size-8 transition-transform duration-700 ease-(--ease-glide) group-hover:rotate-90" />
+          <span className="text-xl font-semibold tracking-tight text-ink">{SITE.name}</span>
         </TransitionLink>
 
-        <SiteNav className="hidden nav:absolute nav:left-1/2 nav:block nav:-translate-x-1/2" />
-
-        <LinkButton
-          href="/contato/"
-          label="Vamos conversar"
-          icon="mail"
-          size="md"
-          className="hidden nav:inline-flex"
-        />
+        <SiteNav className="hidden md:block" />
+        <MobileMenu className="md:hidden" />
       </div>
-      <SiteNav className="border-t border-line nav:hidden" />
     </header>
   );
 }

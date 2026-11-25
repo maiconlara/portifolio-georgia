@@ -8,7 +8,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ["mast", "display", "title", "subtitle", "lead", "kicker"],
+      text: ["hero", "display", "title", "subtitle", "lead"],
     },
   },
 });
@@ -34,11 +34,13 @@ export function normalizePath(path: string): string {
   return withoutHash.replace(/\/+$/, "");
 }
 
+const PORTUGUESE_LIST = new Intl.ListFormat("pt-BR", { style: "long", type: "conjunction" });
+
 /**
- * Two digit counter used in lists and cards ("01", "02"...).
+ * Joins words the way they are written in Portuguese: "Figma, Illustrator e Photoshop".
  *
- * @param value - Number to pad.
+ * @param items - Words to join, in order.
  */
-export function formatCounter(value: number): string {
-  return String(value).padStart(2, "0");
+export function formatList(items: readonly string[]): string {
+  return PORTUGUESE_LIST.format(items);
 }

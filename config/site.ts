@@ -16,51 +16,22 @@ export const SITE = {
   url: "https://example.com",
   /** Active palette. Switch to "chiclete" to see the alternative one. */
   palette: "margarida" as Palette,
-  /** Photo used as the seal of the letter and in the "Sobre" page. */
+  /** Photo used in the seal of the letter, the home page, "Sobre" and "Contato". */
   photo: "/ge/foto.jpg",
-  /** Signature at the end of the letter and in the footer. */
+  /** Signature at the end of the letter of the page transition. */
   signature: "com carinho, Ge",
 } as const;
 
 export interface NavItem {
   href: string;
   label: string;
-  /** Material Symbols name shown next to the page in lists and in the letter that opens it. */
-  icon: string;
-  /** One line about the page, used in the home page summary. */
-  summary: string;
 }
 
 /** Pages of the site, in menu order. */
 export const NAV: NavItem[] = [
-  {
-    href: "/",
-    label: "Início",
-    icon: "local_florist",
-    summary: "A porta de entrada, com um pouco de tudo.",
-  },
-  {
-    href: "/trabalhos/",
-    label: "Trabalhos",
-    icon: "palette",
-    summary: "Envelopes com identidade, ilustração, editorial e digital.",
-  },
-  {
-    href: "/experiencia/",
-    label: "Experiência",
-    icon: "work",
-    summary: "Onde trabalhei, o que estudei e as ferramentas que uso.",
-  },
-  {
-    href: "/sobre/",
-    label: "Sobre",
-    icon: "person",
-    summary: "Quem sou, o que me inspira e o que faço fora da tela.",
-  },
-  {
-    href: "/contato/",
-    label: "Contato",
-    icon: "mail",
-    summary: "E-mail, Instagram, Behance e WhatsApp para conversar.",
-  },
+  { href: "/", label: "Início" },
+  { href: "/trabalhos/", label: "Trabalhos" },
+  { href: "/experiencia/", label: "Experiência" },
+  { href: "/sobre/", label: "Sobre" },
+  { href: "/contato/", label: "Contato" },
 ];

@@ -23,7 +23,7 @@ export function CopyEmailButton({ email, label, copied, failed }: CopyEmailButto
   };
 
   return (
-    <Button variant="inverse-outline" size="md" onPress={handleCopy}>
+    <Button variant="ink-outline" size="md" onPress={handleCopy}>
       <Icon name="content_copy" size="sm" />
       {label}
     </Button>

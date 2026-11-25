@@ -2,20 +2,10 @@ import { cn } from "@/lib/utils";
 
 const PETALS = Array.from({ length: 12 }, (_, index) => index * 30);
 
-interface DaisyProps {
-  className?: string;
-  /** Slow rotation, for large decorative daisies. */
-  spinning?: boolean;
-}
-
 /** Decorative daisy in the palette colors. */
-export function Daisy({ className, spinning = false }: DaisyProps) {
+export function Daisy({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      aria-hidden
-      className={cn("shrink-0", spinning && "animate-[spin-slow_60s_linear_infinite]", className)}
-    >
+    <svg viewBox="0 0 100 100" aria-hidden className={cn("shrink-0", className)}>
       {PETALS.map((angle) => (
         <ellipse
           key={angle}

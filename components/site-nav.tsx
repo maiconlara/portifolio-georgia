@@ -5,28 +5,23 @@ import { TransitionLink } from "@/components/letter/transition-link";
 import { NAV } from "@/config/site";
 import { cn, normalizePath } from "@/lib/utils";
 
-/**
- * Main menu. The current page gets a yellow pill. On narrow screens the list
- * scrolls sideways under the brand.
- */
+/** Menu of the wide screens. The current page is an ink pill. */
 export function SiteNav({ className }: { className?: string }) {
   const pathname = normalizePath(usePathname());
 
   return (
     <nav aria-label="Páginas" className={className}>
-      <ul className="flex gap-1 overflow-x-auto px-(--pad) py-2 [scrollbar-width:none] nav:overflow-visible nav:p-0 [&::-webkit-scrollbar]:hidden">
+      <ul className="flex items-center gap-1">
         {NAV.map((item) => {
           const isCurrent = normalizePath(item.href) === pathname;
           return (
-            <li key={item.href} className="shrink-0">
+            <li key={item.href}>
               <TransitionLink
                 href={item.href}
                 aria-current={isCurrent ? "page" : undefined}
                 className={cn(
-                  "block rounded-full px-3.5 py-1.5 text-[0.98rem] font-semibold transition-colors duration-200",
-                  isCurrent
-                    ? "bg-pollen text-ink shadow-[inset_0_0_0_1.5px_var(--ink)]"
-                    : "text-ink-soft hover:bg-cream-deep hover:text-ink",
+                  "block rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors duration-200",
+                  isCurrent ? "bg-ink text-cream" : "text-ink-soft hover:text-ink",
                 )}
               >
                 {item.label}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageIntro } from "@/components/page-intro";
+import { PageHeader } from "@/components/page-header";
 import { WorkBrowser } from "@/components/works/work-browser";
 import { WORK_CATEGORIES, WORKS } from "@/config/works";
 
@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 export default function WorksPage() {
   return (
     <>
-      <PageIntro
-        kicker="Arquivo completo"
+      <PageHeader
         title="Trabalhos"
-        lead="Cada envelope guarda um tipo de trabalho. Abra um e clique nas peças para ver tudo de perto."
-        icon="palette"
+        lead="Identidade visual, ilustração, design editorial e digital. Clique em um trabalho para ver todas as imagens."
       />
       <div className="wrap">
         <WorkBrowser categories={WORK_CATEGORIES} works={WORKS} />

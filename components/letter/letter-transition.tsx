@@ -12,7 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { IconTile } from "@/components/icon-tile";
+import { Daisy } from "@/components/daisy";
 import { DaisySeal } from "@/components/letter/daisy-seal";
 import { NAV, SITE, type NavItem } from "@/config/site";
 import { normalizePath } from "@/lib/utils";
@@ -36,8 +36,6 @@ const SEALED_TIMEOUT_MS = 6000;
 const NOT_FOUND_PAGE: NavItem = {
   href: "/",
   label: "Ops",
-  icon: "help",
-  summary: "",
 };
 
 interface LetterContextValue {
@@ -133,7 +131,7 @@ export function LetterTransitionProvider({ children }: { children: ReactNode }) 
           <div className="letter__flap" />
           <div className="letter__paper paper-ruled">
             <div className="letter__paper-content grid justify-items-center gap-2 px-6">
-              <IconTile icon={isIntro ? "local_florist" : page.icon} size={72} iconSize="xl" />
+              <Daisy className="size-[72px]" />
               <p className="mt-2 text-[clamp(1.3rem,3vw,1.9rem)] font-semibold tracking-tight text-stem">
                 {isIntro ? "oi, que bom que você veio!" : "abrindo a carta de"}
               </p>
