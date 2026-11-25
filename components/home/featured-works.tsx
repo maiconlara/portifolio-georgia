@@ -1,4 +1,4 @@
-import { TransitionLink } from "@/components/letter/transition-link";
+import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { WorkTile } from "@/components/works/work-tile";
 import type { Work } from "@/config/works";
@@ -23,7 +23,7 @@ export function FeaturedWorks({ title, allWorksLabel, works }: FeaturedWorksProp
         <h2 id="selecionados" className="text-title">
           {title}
         </h2>
-        <TransitionLink
+        <Link
           href="/trabalhos/"
           className="group inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-line decoration-2 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-ink"
         >
@@ -33,14 +33,14 @@ export function FeaturedWorks({ title, allWorksLabel, works }: FeaturedWorksProp
             size="sm"
             className="transition-transform duration-300 ease-(--ease-glide) group-hover:translate-x-1"
           />
-        </TransitionLink>
+        </Link>
       </div>
 
       <div data-reveal-group className="grid gap-x-6 gap-y-12 md:grid-cols-12 lg:gap-x-8">
         {works.map((work, index) => {
           const isLead = index === 0;
           return (
-            <TransitionLink
+            <Link
               key={work.slug}
               href={`/trabalhos/#${work.slug}`}
               className={cn("group flex flex-col", isLead ? "md:col-span-7 md:row-span-2" : "md:col-span-5")}
@@ -50,7 +50,7 @@ export function FeaturedWorks({ title, allWorksLabel, works }: FeaturedWorksProp
                 coverClassName={isLead ? "aspect-4/5 md:aspect-auto md:min-h-0 md:flex-1" : "aspect-4/3"}
                 sizes={isLead ? "(min-width: 820px) 58vw, 100vw" : "(min-width: 820px) 40vw, 100vw"}
               />
-            </TransitionLink>
+            </Link>
           );
         })}
       </div>

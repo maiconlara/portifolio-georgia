@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { ButtonChip } from "@/components/ui/button-chip";
 import { buttonClassName, type ButtonStyleOptions } from "@/components/ui/button-styles";
 import { Icon } from "@/components/ui/icon";
-import { TransitionLink } from "@/components/letter/transition-link";
 
 export interface LinkButtonProps extends ButtonStyleOptions {
   href: string;
@@ -15,8 +15,8 @@ export interface LinkButtonProps extends ButtonStyleOptions {
 }
 
 /**
- * A link drawn exactly like `Button`. Site pages go through `TransitionLink`
- * (the letter opens); external URLs, `mailto:` and anchors use a plain `<a>`.
+ * A link drawn exactly like `Button`. Site pages go through Next's `Link`;
+ * external URLs, `mailto:` and anchors use a plain `<a>`.
  * With `iconOnly`, the label becomes the accessible name.
  */
 export function LinkButton({ href, label, icon, arrow = false, newTab = false, ...style }: LinkButtonProps) {
@@ -51,8 +51,8 @@ export function LinkButton({ href, label, icon, arrow = false, newTab = false, .
   }
 
   return (
-    <TransitionLink href={href} className={className} aria-label={ariaLabel}>
+    <Link href={href} className={className} aria-label={ariaLabel}>
       {content}
-    </TransitionLink>
+    </Link>
   );
 }

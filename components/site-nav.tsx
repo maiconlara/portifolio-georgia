@@ -1,7 +1,7 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { TransitionLink } from "@/components/letter/transition-link";
 import { NAV } from "@/config/site";
 import { cn, normalizePath } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ export function SiteNav({ className }: { className?: string }) {
           const isCurrent = normalizePath(item.href) === pathname;
           return (
             <li key={item.href}>
-              <TransitionLink
+              <Link
                 href={item.href}
                 aria-current={isCurrent ? "page" : undefined}
                 className={cn(
@@ -25,7 +25,7 @@ export function SiteNav({ className }: { className?: string }) {
                 )}
               >
                 {item.label}
-              </TransitionLink>
+              </Link>
             </li>
           );
         })}

@@ -15,8 +15,8 @@ interface DaisySealProps {
 
 /**
  * Daisy-shaped wax seal: white petals around a yellow center that holds Ge's
- * photo. Closes the letter of the page transition and decorates the contact
- * page. Petal colors follow the active palette.
+ * photo. Seals the letter of the contact page. Petal colors follow the
+ * active palette.
  */
 export function DaisySeal({ photo, className, alt = "" }: DaisySealProps) {
   return (

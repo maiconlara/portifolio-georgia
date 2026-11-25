@@ -3,6 +3,7 @@ import { EducationSection } from "@/components/experience/education-section";
 import { ExperienceList } from "@/components/experience/experience-list";
 import { SkillGroups } from "@/components/experience/skill-groups";
 import { PageHeader } from "@/components/page-header";
+import { PageTransition } from "@/components/page-transition";
 import { EXPERIENCE } from "@/config/experience";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function ExperiencePage() {
   return (
-    <>
+    <PageTransition>
       <PageHeader title={EXPERIENCE.intro.title} lead={EXPERIENCE.intro.lead} />
       <ExperienceList title={EXPERIENCE.jobsTitle} jobs={EXPERIENCE.jobs} />
       <SkillGroups title={EXPERIENCE.skillsTitle} groups={EXPERIENCE.skills} />
@@ -22,6 +23,6 @@ export default function ExperiencePage() {
         languagesTitle={EXPERIENCE.languagesTitle}
         languages={EXPERIENCE.languages}
       />
-    </>
+    </PageTransition>
   );
 }

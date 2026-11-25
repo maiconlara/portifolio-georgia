@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { ContactChannels } from "@/components/contact/contact-channels";
 import { ContactSubjects } from "@/components/contact/contact-subjects";
 import { CopyEmailButton } from "@/components/contact/copy-email-button";
-import { DaisySeal } from "@/components/letter/daisy-seal";
+import { DaisySeal } from "@/components/daisy-seal";
 import { CONTACT } from "@/config/contact";
 import { SITE } from "@/config/site";
 
@@ -14,7 +14,7 @@ import { SITE } from "@/config/site";
 export function ContactSection() {
   return (
     <section className="wrap pb-24 pt-14 md:pb-36 md:pt-24">
-      <div className="relative rounded-3xl bg-env-paper px-6 pb-10 pt-16 shadow-[0_0_0_1px_var(--line),var(--tile-shadow)] sm:px-10 md:px-16 md:pb-14 md:pt-20 lg:px-20">
+      <div className="relative rounded-3xl bg-paper px-6 pb-10 pt-16 shadow-[0_0_0_1px_var(--line),var(--tile-shadow)] sm:px-10 md:px-16 md:pb-14 md:pt-20 lg:px-20">
         <span
           className="enter-stamp absolute -top-12 right-4 block w-28 sm:right-8 sm:w-32 md:-top-16 md:right-14 md:w-44"
           style={{ "--enter-step": "0.45s" } as CSSProperties}

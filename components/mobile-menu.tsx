@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { Drawer } from "@heroui/react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Daisy } from "@/components/daisy";
-import { TransitionLink } from "@/components/letter/transition-link";
 import { Icon } from "@/components/ui/icon";
 import { NAV, SITE } from "@/config/site";
 import { cn, normalizePath } from "@/lib/utils";
@@ -11,13 +12,20 @@ import { cn, normalizePath } from "@/lib/utils";
 /**
  * Menu of the narrow screens: a "Menu" button that drops a HeroUI `Drawer`
  * from the top with the pages in large type. Choosing a page closes the
- * drawer and plays the letter.
+ * drawer at once, without its exit animation: react-aria ends that
+ * animation with a `flushSync`, which would cancel the page transition
+ * that is starting at the same moment.
  */
 export function MobileMenu({ className }: { className?: string }) {
   const pathname = normalizePath(usePathname());
+  const [isLeavingPage, setIsLeavingPage] = useState(false);
+
+  const handleOpenChange = (isOpen: boolean) => {
+    if (isOpen) setIsLeavingPage(false);
+  };
 
   return (
-    <Drawer>
+    <Drawer onOpenChange={handleOpenChange}>
       <Drawer.Trigger
         className={cn(
           "flex h-10 items-center gap-2 rounded-full px-4 font-semibold text-ink shadow-[inset_0_0_0_1px_var(--line)] transition-colors hover:bg-cream-deep",
@@ -27,7 +35,7 @@ export function MobileMenu({ className }: { className?: string }) {
         <Icon name="menu" size="sm" />
         Menu
       </Drawer.Trigger>
-      <Drawer.Backdrop>
+      <Drawer.Backdrop className={cn(isLeavingPage && "transition-none")}>
         <Drawer.Content placement="top">
           <Drawer.Dialog aria-label="Menu" className="rounded-b-3xl bg-background px-(--pad) pb-10 pt-0">
             {({ close }) => (
@@ -43,9 +51,12 @@ export function MobileMenu({ className }: { className?: string }) {
                       const isCurrent = normalizePath(item.href) === pathname;
                       return (
                         <li key={item.href}>
-                          <TransitionLink
+                          <Link
                             href={item.href}
-                            onClick={close}
+                            onClick={() => {
+                              setIsLeavingPage(true);
+                              close();
+                            }}
                             aria-current={isCurrent ? "page" : undefined}
                             className={cn(
                               "flex items-center justify-between py-1.5 text-[2.6rem] font-semibold leading-tight tracking-[-0.035em]",
@@ -54,7 +65,7 @@ export function MobileMenu({ className }: { className?: string }) {
                           >
                             {item.label}
                             {isCurrent ? <Icon name="local_florist" className="text-pollen-deep" size="lg" /> : null}
-                          </TransitionLink>
+                          </Link>
                         </li>
                       );
                     })}

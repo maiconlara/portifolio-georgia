@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactSection } from "@/components/contact/contact-section";
+import { PageTransition } from "@/components/page-transition";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactSection />;
+  return (
+    <PageTransition>
+      <ContactSection />
+    </PageTransition>
+  );
 }

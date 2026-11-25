@@ -16,9 +16,9 @@ export const SITE = {
   url: "https://example.com",
   /** Active palette. Switch to "chiclete" to see the alternative one. */
   palette: "margarida" as Palette,
-  /** Photo used in the seal of the letter, the home page, "Sobre" and "Contato". */
+  /** Photo used in the home page sentence, "Sobre" and the seal of "Contato". */
   photo: "/ge/foto.jpg",
-  /** Signature at the end of the letter of the page transition. */
+  /** Signature at the end of the letter of the "Contato" page. */
   signature: "com carinho, Ge",
 } as const;
 
