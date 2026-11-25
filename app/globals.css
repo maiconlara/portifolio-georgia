@@ -301,6 +301,27 @@
     border-radius: 1.5rem;
   }
 
+  /*
+   * HeroUI Modal: replaces its enter and exit (zoom plus a `filter: blur()`
+   * keyframe) with opacity and a short slide, which stay smooth on browsers
+   * without hardware acceleration.
+   */
+  .modal__backdrop[data-entering="true"] {
+    animation: overlay-fade 140ms ease-out both;
+  }
+
+  .modal__backdrop[data-exiting="true"] {
+    animation: overlay-fade 100ms ease-in reverse both;
+  }
+
+  .modal__container[data-entering="true"] {
+    animation: overlay-rise 180ms var(--ease-glide) both;
+  }
+
+  .modal__container[data-exiting="true"] {
+    animation: overlay-fade 100ms ease-in reverse both;
+  }
+
   /* ---------- Fixed header: a hairline shows up once the page scrolls ---------- */
   .site-header {
     box-shadow: 0 1px 0 transparent;
@@ -452,6 +473,19 @@
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
     }
+  }
+}
+
+@keyframes overlay-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes overlay-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
 }
 

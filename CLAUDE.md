@@ -24,6 +24,7 @@ Stack igual à do Prospect+ (`C:\Users\maico\dev\lead-brasil`): Next.js 16 (App 
 - Cores só por token. As paletas ficam em `app/globals.css` (`[data-palette="..."]`) e a ativa é `SITE.palette` em `config/site.ts`. "margarida" vem da foto das margaridas; "chiclete" é a alternativa de exemplo.
 - Largura da página: utilitário `wrap` (até 1600px, margem lateral em `--pad`).
 - Sem etiqueta pequena acima dos títulos (eyebrow): cada seção abre direto no título.
+- Movimento leve: animar só `opacity` e `transform` curtos. Nada de `backdrop-filter`, desfoque ou zoom em imagens grandes, porque o site precisa rodar liso em navegador sem aceleração de hardware. A janela do trabalho usa fundo escurecido sólido (`variant="opaque"`) e as animações próprias `.modal__*` do `globals.css`.
 - Cantos: botões e filtros em pílula, imagens e cartões com 16px (`rounded-2xl`), painéis e janelas com 24px (`rounded-3xl`).
 - Ícones sempre por `<Icon name="..." />` de `components/ui/icon.tsx`. A margarida desenhada é `Daisy`.
 - Botão: `Button`; link com cara de botão: `LinkButton`; aviso: `toast` de `components/ui/toast.tsx`. Botões não sobem no hover: mudam de cor e encolhem de leve no clique.

@@ -53,7 +53,7 @@ export function WorkDialog({ work, isOpen, siblings, onNavigate, onClose }: Work
   );
 
   return (
-    <Modal.Backdrop isOpen={isOpen} onOpenChange={(open) => !open && onClose()} variant="blur">
+    <Modal.Backdrop isOpen={isOpen} onOpenChange={(open) => !open && onClose()} variant="opaque">
       <Modal.Container placement="center" scroll="inside">
         <Modal.Dialog
           className="w-[min(1080px,calc(100vw-2rem))] max-w-none overflow-hidden bg-cream p-0 sm:max-w-none"
