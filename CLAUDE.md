@@ -16,6 +16,7 @@ Stack igual à do Prospect+ (`C:\Users\maico\dev\lead-brasil`): Next.js 16 (App 
 - Foto da Ge em `public/ge/foto.jpg` (`SITE.photo`): vai no meio da frase da página inicial, no Sobre e no selo de margarida do Contato.
 - Página não desenha: só junta componentes e passa o conteúdo de `config/*`.
 - Sem rodapé e sem botão flutuante de contato: o Contato fica só no menu.
+- Prévia de links (WhatsApp, Instagram, LinkedIn): cada `page.tsx` exporta `metadata` com `buildPageMetadata` (`lib/page-metadata.ts`), que põe título, descrição, endereço e a imagem. A imagem é gerada no build em `app/share-image.png/route.tsx`, com a frase da página inicial, a foto e as cores da paleta ativa lidas do `globals.css`. O endereço público do site fica em `SITE.url`.
 
 ## Visual
 

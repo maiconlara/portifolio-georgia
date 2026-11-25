@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/toast";
 import { SITE } from "@/config/site";
+import { HOME_TITLE, SHARE_IMAGE } from "@/lib/page-metadata";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ const instrumentSans = Instrument_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name}: ${SITE.role.toLowerCase()}`,
+    default: HOME_TITLE,
     template: `%s, ${SITE.name}`,
   },
   description: SITE.description,
@@ -23,8 +24,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: SITE.name,
-    title: `${SITE.name}: ${SITE.role.toLowerCase()}`,
+    title: HOME_TITLE,
     description: SITE.description,
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: HOME_TITLE,
+    description: SITE.description,
+    images: [SHARE_IMAGE],
   },
 };
 

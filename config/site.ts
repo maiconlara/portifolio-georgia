@@ -13,7 +13,7 @@ export const SITE = {
     "Portfólio da Georgia (Ge): identidade visual, ilustração e design editorial feitos com o carinho de uma carta escrita à mão.",
   year: 2026,
   /** Final address of the site, used in links shared on social networks. */
-  url: "https://example.com",
+  url: "https://portifolio-georgia.vercel.app",
   /** Active palette. Switch to "chiclete" to see the alternative one. */
   palette: "margarida" as Palette,
   /** Photo used in the home page sentence, "Sobre" and the seal of "Contato". */

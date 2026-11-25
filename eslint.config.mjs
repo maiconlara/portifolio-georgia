@@ -7,6 +7,10 @@ const config = [
   {
     ignores: ["node_modules/**", ".next/**", "out/**", "next-env.d.ts"],
   },
+  {
+    files: ["app/share-image.png/route.tsx"],
+    rules: { "@next/next/no-img-element": "off" },
+  },
 ];
 
 export default config;

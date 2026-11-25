@@ -5,11 +5,13 @@ import { SkillGroups } from "@/components/experience/skill-groups";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { EXPERIENCE } from "@/config/experience";
+import { buildPageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Experiência",
   description: "Onde a Ge trabalhou, o que estudou e as ferramentas que usa.",
-};
+  path: "/experiencia/",
+});
 
 export default function ExperiencePage() {
   return (

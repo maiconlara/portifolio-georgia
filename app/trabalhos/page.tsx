@@ -3,11 +3,13 @@ import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { WorkBrowser } from "@/components/works/work-browser";
 import { WORK_CATEGORIES, WORKS } from "@/config/works";
+import { buildPageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Trabalhos",
   description: "Identidade visual, ilustração, design editorial e digital.",
-};
+  path: "/trabalhos/",
+});
 
 export default function WorksPage() {
   return (
